@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 为这个mapper指定一个唯一的namespace，namespace的值习惯上设置成包名+sql映射文件名，这样就能够保证namespace的值是唯一的
+例如namespace="me.gacl.mapping.userMapper"就是me.gacl.mapping(包名)+userMapper(userMapper.xml文件去除后缀)
+ -->
+<mapper namespace="dao.IcommandDao">
+    <!-- 在select标签中编写查询的SQL语句， 设置select标签的id属性为getUser，id属性值必须是唯一的，不能够重复
+    使用parameterType属性指明查询时使用的参数类型，resultType属性指明查询返回的结果集类型
+    resultType="me.gacl.domain.User"就表示将查询结果封装成一个User类的对象返回
+    User类就是users表所对应的实体类
+    -->
+    <!--
+        根据id查询得到一个user对象
+     -->
+    <resultMap id="messageFindAll" type="entity.Command">
+        <id column="comm_id" jdbcType="INTEGER" property="id"/>
+        <result column="command" jdbcType="VARCHAR" property="command"/>
+        <result column="description" jdbcType="VARCHAR" property="description"/>
+        <collection property="contents" resultMap="config.mapper.command_content.contents"/>
+    </resultMap>
+
+
+    <select id="findAll" resultMap="messageFindAll" parameterType="entity.Command"><!--  resultMap  表示返回一个结果集-->
+       select a.id comm_id,a.command,a.description,b.id,b.content from command a LEFT JOIN command_content b on a.id = b.command_id
+        <where>
+            <if test="command != null and !&quot;&quot;.equals(command.trim())">
+                AND a.command = #{command}
+            </if>
+
+            <if test="description != null and !&quot;&quot;.equals(description.trim())">
+
+                AND a.description like  '%${description}%'
+            </if>
+
+        </where>
+
+    </select>
+    
+    <select id="findOne" resultMap="messageFindAll" parameterType="int">
+        SELECT a.id comm_id,a.command, a.description, b.id,b.content FROM command a LEFT JOIN command_content b on a.id = b.command_id WHERE  a.id = #{id}
+    </select>
+    
+    <update id="update" parameterType="entity.Command">
+        UPDATE command  SET command = #{command},description = #{description} WHERE id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="int">
+        DELETE FROM mybatis.command WHERE id = #{id}
+
+    </delete>
+
+    <delete id="deletes" parameterType="int">
+        DELETE FROM mybatis.command WHERE id in(
+          <foreach collection="array" item="item" separator=",">
+              #{item}
+          </foreach>
+        )
+    </delete>
+
+    <resultMap id="contentFindRandom" type="entity.Command_content">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="content" jdbcType="VARCHAR" property="content"/>
+    </resultMap>
+    <select id="selectRandom" parameterType="String" resultMap="contentFindRandom">
+        SELECT id,content FROM command_content where command_id = (SELECT id from command WHERE command = #{command}) ORDER BY  RAND() LIMIT 1
+    </select>
+
+
+
+</mapper>

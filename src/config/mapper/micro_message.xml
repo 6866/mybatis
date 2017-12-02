@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 为这个mapper指定一个唯一的namespace，namespace的值习惯上设置成包名+sql映射文件名，这样就能够保证namespace的值是唯一的
+例如namespace="me.gacl.mapping.userMapper"就是me.gacl.mapping(包名)+userMapper(userMapper.xml文件去除后缀)
+ -->
+<mapper namespace="config.mapper.micro_message">
+    <!-- 在select标签中编写查询的SQL语句， 设置select标签的id属性为getUser，id属性值必须是唯一的，不能够重复
+    使用parameterType属性指明查询时使用的参数类型，resultType属性指明查询返回的结果集类型
+    resultType="me.gacl.domain.User"就表示将查询结果封装成一个User类的对象返回
+    User类就是users表所对应的实体类
+    -->
+    <!--
+        根据id查询得到一个user对象
+     -->
+    <resultMap id="messageFindAll" type="entity.Micro_message">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="command" jdbcType="VARCHAR" property="command"/>
+        <result column="description" jdbcType="VARCHAR" property="description"/>
+        <result column="content" jdbcType="VARCHAR" property="content"/>
+        <association property=""
+    </resultMap>
+    
+    <select id="getMessage" parameterType="int"
+            resultType="entity.Micro_message">
+        select * from micro_message where id=#{id}
+    </select>
+    <select id="findAll" resultMap="messageFindAll" parameterType="entity.Micro_message"><!--表示返回一个结果集-->
+       select id,command,description,content from micro_message
+        <where>
+            <if test="command != null and !&quot;&quot;.equals(command.trim())">
+                AND command = #{command}
+            </if>
+
+            <if test="description != null and !&quot;&quot;.equals(description.trim())">
+
+                AND description like  '%${description}%'
+            </if>
+
+        </where>
+
+    </select>
+
+    <delete id="deleteOne" parameterType="INTEGER" >
+        DELETE FROM mybatis.micro_message WHERE id=#{parameter }
+    </delete>
+    
+    <delete id="deleteBatch" parameterType="java.lang.String">
+        
+          DELETE FROM mybatis.micro_message WHERE id IN (
+            <foreach collection="array" separator="," item="item">
+                #{item}
+            </foreach>
+          )
+    </delete>
+</mapper>
