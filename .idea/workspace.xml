@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0f18075b-26ab-42a9-9a7d-fa6b67034656" name="Default" comment="" />
+    <list default="true" id="0f18075b-26ab-42a9-9a7d-fa6b67034656" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+    </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -109,8 +111,8 @@
       <file leaf-file-name="DBaccess.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/db/DBaccess.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="405">
-              <caret line="21" column="8" lean-forward="false" selection-start-line="21" selection-start-column="8" selection-end-line="21" selection-end-column="8" />
+            <state relative-caret-position="378">
+              <caret line="20" column="7" lean-forward="false" selection-start-line="20" selection-start-column="7" selection-end-line="20" selection-end-column="7" />
               <folding />
             </state>
           </provider>
@@ -983,7 +985,7 @@
       <workItem from="1511665642958" duration="30999000" />
       <workItem from="1511741691843" duration="7751000" />
       <workItem from="1511831563146" duration="5460000" />
-      <workItem from="1512197692643" duration="3698000" />
+      <workItem from="1512197692643" duration="4055000" />
     </task>
     <servers />
   </component>
@@ -1005,7 +1007,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="157800000" />
+    <option name="totallyTimeSpent" value="158157000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1481,8 +1483,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/db/DBaccess.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="21" column="8" lean-forward="false" selection-start-line="21" selection-start-column="8" selection-end-line="21" selection-end-column="8" />
+        <state relative-caret-position="378">
+          <caret line="20" column="7" lean-forward="false" selection-start-line="20" selection-start-column="7" selection-end-line="20" selection-end-column="7" />
           <folding />
         </state>
       </provider>
