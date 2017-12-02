@@ -18,7 +18,7 @@ public class DBaccess {
         System.out.println("DB开始加载。。。");
         //通过配置文件获取配置信息
 
-       
+          
 
 
         Reader reader =  Resources.getResourceAsReader("config/myBatis.xml");
